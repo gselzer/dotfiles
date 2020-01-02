@@ -95,6 +95,12 @@ gtagsv() {
     echo "[$remote]" && git ls-remote $remote | grep '/tags/'
   done
 }
+#TODO: make this more visible. Something interactive, maybe, where we show
+# the files that would be added, and then ask for confirmation. Thus the
+# command is not blind.
+gak() {
+  git add $({git ls-files --others --exclude-standard; git diff --name-only} | grep $@)
+}
 
 # --== git-svn ==--
 
