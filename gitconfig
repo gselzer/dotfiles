@@ -97,8 +97,8 @@
 	color = auto
 
 [user]
-	name = Curtis Rueden
-	email = ctrueden@wisc.edu
+	name = Gabriel Selzer
+	email = gjselzer@wisc.edu
 
 [rebase]
 	autosquash = true
