@@ -8,7 +8,13 @@ if [ -x /usr/libexec/java_home ]; then
 elif [ -x /usr/sbin/update-java-alternatives ]; then
 	# Linux
 	jhome() {
-		/usr/sbin/update-java-alternatives -l | grep "$@" | head -n 1 | cut -f 3 -d ' '
+		localJava=$(echo "$HOME/java/"* | grep $0) 
+		if [ "$localJava" ]
+		then
+			echo "$localJava"
+		else
+			/usr/sbin/update-java-alternatives -l | grep "$@" | head -n 1 | cut -f 3 -d ' '
+		fi
 	}
 	jswitch() {
 		sudo update-java-alternatives --set "${JAVA_HOME##*/}"
@@ -60,8 +66,8 @@ alias j17='export JAVA_HOME="$J17" && jswitch && echo "JAVA_HOME -> $JAVA_HOME" 
 alias j18='export JAVA_HOME="$J18" && jswitch && echo "JAVA_HOME -> $JAVA_HOME" && java -version'
 alias j19='export JAVA_HOME="$J19" && jswitch && echo "JAVA_HOME -> $JAVA_HOME" && java -version'
 
-# use Java 8 by default if available
-test -n "$J8" && export JAVA_HOME="$J8"
+# use Java 11 by default if available
+test -n "$J11" && export JAVA_HOME="$J11"
 
 # unset the actual classpath, since some programs play badly with it
 unset CLASSPATH
